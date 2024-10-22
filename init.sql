@@ -1,0 +1,30 @@
+CREATE DATABASE QUANLYBENHNHAN
+USE QUANLYBENHNHAN
+
+-- TẠO DB
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- INPUT DỮ LIỆU
