@@ -313,7 +313,6 @@ INSERT INTO DonThuoc (HoSoID, NgayLap) VALUES (22, '2023-01-22');
 
 
 -- đơn thuốc chi tiết
--- Dữ liệu chi tiết đơn thuốc
 INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (1, 1, 20, N'Uống 1 viên mỗi 6 giờ khi cần.');
 INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (1, 2, 10, N'Uống 1 viên 2 lần mỗi ngày trong 7 ngày.');
 INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (2, 3, 15, N'Uống 1 viên mỗi ngày.');
