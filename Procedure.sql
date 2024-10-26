@@ -18,10 +18,6 @@
 
 -- Thủ tục thêm thuốc (thêm thuốc)
 
-
-
-
-
 -- thủ tục lấy danh sách bệnh nhân theo phòng khám
 
 -- thủ tục lấy danh sách bác sĩ theo Khoa
