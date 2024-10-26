@@ -103,6 +103,7 @@ CREATE TABLE DonThuocChiTiet
   FOREIGN KEY (DonThuocID) REFERENCES DonThuoc(DonThuocID),
   FOREIGN KEY (ThuocID) REFERENCES Thuoc(ThuocID)
 );
+
 GO
 
 -- Insert dữ liệu
@@ -312,7 +313,28 @@ INSERT INTO DonThuoc (HoSoID, NgayLap) VALUES (22, '2023-01-22');
 
 
 -- đơn thuốc chi tiết
-INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong) VALUES (1, 1, 2);
+-- Dữ liệu chi tiết đơn thuốc
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (1, 1, 20, N'Uống 1 viên mỗi 6 giờ khi cần.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (1, 2, 10, N'Uống 1 viên 2 lần mỗi ngày trong 7 ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (2, 3, 15, N'Uống 1 viên mỗi ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (2, 4, 30, N'Uống 1 viên mỗi 8 giờ.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (3, 5, 25, N'Uống 1 viên 3 lần mỗi ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (3, 6, 12, N'Uống 1 viên mỗi ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (4, 7, 5, N'Uống 1 viên mỗi ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (4, 8, 10, N'Uống 1 viên khi cần.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (5, 9, 6, N'Uống 1 viên mỗi sáng.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (5, 10, 4, N'Uống 1 viên mỗi chiều.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (6, 11, 20, N'Uống 1 viên mỗi ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (6, 12, 10, N'Uống 1 viên mỗi ngày trước khi ăn.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (7, 13, 15, N'Uống 1 viên mỗi 12 giờ.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (7, 14, 5, N'Uống 1 viên 2 lần mỗi ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (8, 15, 3, N'Uống 1 viên khi cần.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (8, 16, 10, N'Uống 1 viên mỗi ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (9, 17, 8, N'Uống 1 viên mỗi 8 giờ.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (9, 18, 6, N'Uống 1 viên 3 lần mỗi ngày.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (10, 19, 5, N'Uống 1 viên mỗi tối.');
+INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (10, 20, 4, N'Uống 1 viên mỗi sáng.');
+
 
 
 
