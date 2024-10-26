@@ -335,14 +335,20 @@ INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (10,
 INSERT INTO DonThuocChiTiet (DonThuocID, ThuocID, SoLuong, CachDung) VALUES (10, 20, 4, N'Uống 1 viên mỗi sáng.');
 
 
-
-
+-- Select all
 SELECT * FROM Khoa;
 SELECT * FROM Phong;
 SELECT * FROM YTa;
-SELECT * FROM BenhNhan;
+SELECT * FROM BenhNhan;D
 SELECT * FROM Thuoc;
 SELECT * FROM BacSi;
 SELECT * FROM HoSoBenhAn;
 SELECT * FROM DonThuoc;
 SELECT * FROM DonThuocChiTiet;
+
+
+-- Updata so luong giuong trong trong phong
+UPDATE Phong
+SET GiuongTrong = TongSoGiuong - COALESCE((SELECT COUNT(*) FROM BenhNhan WHERE PhongID = Phong.PhongID), 0)
+
+GO
