@@ -61,7 +61,7 @@ CREATE TABLE BenhNhan
   NgayNhapVien DATE,
   NgayXuatVien DATE default NULL,
   PhongID INT,
-  BaoHiemID INT,
+  BaoHiemID INT DEFAULT 1,
   FOREIGN KEY (PhongID) REFERENCES Phong(PhongID),
   FOREIGN KEY (BaoHiemID) REFERENCES BaoHiemYTe(BaoHiemID)
 );
@@ -105,6 +105,8 @@ CREATE TABLE DichVu
   SoLan INT,
   LoaiDichVuID INT,
   BienLaiID INT,
+  BenhNhanID INT,
+  FOREIGN KEY (BenhNhanID) REFERENCES BenhNhan(BenhNhanID),
   FOREIGN KEY (BienLaiID) REFERENCES BienLai(BienLaiID),
   FOREIGN KEY (LoaiDichVuID) REFERENCES LoaiDichVuKham(LoaiDichVuID)
 );
@@ -114,10 +116,12 @@ CREATE TABLE DonThuoc
 (
   DonThuocID INT PRIMARY KEY IDENTITY(1,1),
   ThuocID INT,
+  BenhNhanID INT,
   SoLuong INT,
   CachDung NVARCHAR(MAX),
   BienLaiID INT,
   FOREIGN KEY (BienLaiID) REFERENCES BienLai(BienLaiID),
+  FOREIGN KEY (BenhNhanID) REFERENCES BenhNhan(BenhNhanID),
   FOREIGN KEY (ThuocID) REFERENCES Thuoc(ThuocID)
 );
 
@@ -306,45 +310,44 @@ INSERT INTO BienLai (HoSoID, TongTien) VALUES (21, NULL);
 INSERT INTO BienLai (HoSoID, TongTien) VALUES (22, NULL);
 
 -- Dịch vụ
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (1, 1, 1);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (2, 1, 2);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (3, 1, 3);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (4, 1, 4);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (5, 1, 5);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (6, 1, 6);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (7, 1, 7);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (8, 2, 8);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (9, 1, 9);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (10, 1, 10);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (11, 2, 11);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (12, 1, 12);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (1, 1, 13);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (2, 1, 14);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (3, 1, 15);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (4, 1, 16);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (5, 1, 17);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (6, 1, 18);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (7, 1, 19);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (8, 1, 20);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (9, 1, 21);
-INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID) VALUES (10, 1, 22);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (1, 1, 1, 1);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (2, 1, 2, 2);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (3, 1, 3, 3);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (4, 1, 4, 4);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (5, 1, 5, 5);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (6, 1, 6, 6);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (7, 1, 7, 7);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (8, 2, 8, 8);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (9, 1, 9, 9);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (10, 1, 10, 10);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (11, 2, 11, 11);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (12, 1, 12, 12);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (1, 1, 13, 13);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (2, 1, 14, 14);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (3, 1, 15, 15);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (4, 1, 16, 16);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (5, 1, 17, 17);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (6, 1, 18, 18);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (7, 1, 19, 19);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (8, 1, 20, 20);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (9, 1, 21, 21);
+INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (10, 1, 22, 22);
 
 -- Đơn thuốc
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (1, 1, 1);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (2, 3, 1);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (3, 1, 1);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (2, 1, 2);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (3, 2, 3);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (4, 1, 4);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (5, 1, 5);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (6, 1, 6);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (7, 1, 7);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (8, 2, 8);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (9, 1, 9);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (10, 1, 10);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (11, 2, 11);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID) VALUES (12, 1, 12);
-
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (1, 1, 1, 1);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (2, 3, 1, 1);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (3, 1, 1, 1);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (2, 1, 2, 2);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (3, 2, 3, 3);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (4, 1, 4, 4);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (5, 1, 5, 5);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (6, 1, 6, 6);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (7, 1, 7, 7);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (8, 2, 8, 8);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (9, 1, 9, 9);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (10, 1, 10, 10);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (11, 2, 11, 11);
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (12, 1, 12, 12);
 
 
 
