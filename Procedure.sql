@@ -11,16 +11,14 @@ CREATE PROCEDURE sp_ThemBenhNhan
   @BaoHiemID INT
 AS
 BEGIN       
-	DECLARE @ConTrong BIT;
-	-- EXEC sp_KiemTraPhongTrong @PhongID, @ConTrong OUTPUT;
-	SET @ConTrong = dbo.KiemTraPhongConTrong (@PhongID)
-
-	IF @ConTrong = 0
+  -- Kiểm tra phòng còn trống không
+	IF dbo.KiemTraPhongConTrong (@PhongID) = 0
 	BEGIN
     PRINT N'Phòng đã hết giường trống!';
     RETURN;
 	END
 
+  -- Kiểm tra loại bảo hiểm y tế tồn tại không
 	IF NOT EXISTS (SELECT * FROM BaoHiemYTe WHERE BaoHiemID = @BaoHiemID) 
 	BEGIN 
     PRINT N'Bảo hiểm không tồn tại!'; 
@@ -53,16 +51,17 @@ CREATE PROCEDURE sp_CapNhatBenhNhan
   @BaoHiemID INT
 AS
 BEGIN
-  IF NOT EXISTS (SELECT 1 FROM BenhNhan WHERE BenhNhanID = @BenhNhanID)
+
+  IF NOT EXISTS (SELECT * FROM BenhNhan WHERE BenhNhanID = @BenhNhanID)
   BEGIN
     PRINT N'Bệnh nhân không tồn tại!';
     RETURN;
   END
   IF NOT EXISTS (SELECT * FROM BaoHiemYTe WHERE BaoHiemID = @BaoHiemID) 
-    BEGIN 
-      PRINT N'Bảo hiểm không tồn tại!'; 
-      RETURN; 
-    END
+  BEGIN 
+    PRINT N'Bảo hiểm không tồn tại!'; 
+    RETURN; 
+  END
 
   UPDATE BenhNhan
   SET HoTen = @HoTen,
@@ -89,20 +88,21 @@ CREATE PROCEDURE sp_TaoBienLai
 AS
 BEGIN
  -- Kiểm tra nếu hồ sơ bệnh án tồn tại trong bảng HoSoBenhAn
-  IF NOT EXISTS (SELECT 1 FROM HoSoBenhAn WHERE HoSoID = @HoSoID)
+  IF NOT EXISTS (SELECT * FROM HoSoBenhAn WHERE HoSoID = @HoSoID)
   BEGIN
     PRINT N'Hồ sơ bệnh án không tồn tại';
     RETURN;
   END
 
-  IF EXISTS (SELECT 1 FROM BienLai WHERE HoSoID = @HoSoID)
+  -- Kiểm tra nếu biên lai đã tồn tại
+  IF EXISTS (SELECT * FROM BienLai WHERE HoSoID = @HoSoID)
   BEGIN
     PRINT N'Biên lai đã tồn tại cho hồ sơ bệnh án này';
     RETURN;
   END
   
   INSERT INTO BienLai(HoSoID, TongTien, ThanhToan) VALUES(@HoSoID, 0, 0)
-  PRINT N'Đã tạo biên lai cho hồ sơ bệnh án'
+  PRINT N'Tạo biên lai cho hồ sơ bệnh án thành công'
 END
 GO
 
@@ -117,14 +117,14 @@ CREATE PROCEDURE sp_TaoHoSoBenhAn
 AS
 BEGIN        
   -- Kiểm tra bệnh nhân tồn tại
-  IF NOT EXISTS (SELECT 1 FROM BenhNhan WHERE BenhNhanID = @BenhNhanID)
+  IF NOT EXISTS (SELECT * FROM BenhNhan WHERE BenhNhanID = @BenhNhanID)
   BEGIN
     PRINT N'Bệnh nhân không tồn tại!';
     RETURN;
   END
   
   -- Kiểm tra bác sĩ tồn tại
-  IF NOT EXISTS (SELECT 1 FROM BacSi WHERE BacSiID = @BacSiID)
+  IF NOT EXISTS (SELECT * FROM BacSi WHERE BacSiID = @BacSiID)
   BEGIN
     PRINT N'Bác sĩ không tồn tại!';
     RETURN;
@@ -138,8 +138,8 @@ BEGIN
   SELECT @HoSoID = MAX(HoSoID) FROM HoSoBenhAn;
 
 
-  EXEC sp_TaoBienLai @HoSoID;
   PRINT N'Tạo hồ sơ bệnh án thành công!';
+  EXEC sp_TaoBienLai @HoSoID;
 END;
 GO
 
@@ -160,6 +160,7 @@ CREATE PROCEDURE sp_ThanhToan
   @BenhNhanID INT
 AS
 BEGIN
+  -- Kiểm tra bệnh nhân tồn tại
   IF NOT EXISTS (SELECT * FROM HoSoBenhAn WHERE BenhNhanID = @BenhNhanID)
   BEGIN
     PRINT N'Bệnh nhân không tồn tại';
@@ -362,9 +363,3 @@ SELECT * FROM Thuoc
 SELECT * FROM BienLai
 EXECUTE sp_TaoDonThuoc 1, 1, 23, N'Uống 1 viên/ngày'
 -- ok
-
-
-
-
-
-
