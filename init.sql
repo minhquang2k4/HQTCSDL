@@ -95,6 +95,7 @@ CREATE TABLE BienLai
   BienLaiID INT PRIMARY KEY IDENTITY(1,1),
   HoSoID INT,
   TongTien DECIMAL(10, 2),
+  ThanhToan BIT DEFAULT 0,
   FOREIGN KEY (HoSoID) REFERENCES HoSoBenhAn(HoSoID)
 );
 
@@ -334,22 +335,20 @@ INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (9, 1, 21
 INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (10, 1, 22, 22);
 
 -- Đơn thuốc
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (1, 1, 1, 1);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (2, 3, 1, 1);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (3, 1, 1, 1);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (2, 1, 2, 2);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (3, 2, 3, 3);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (4, 1, 4, 4);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (5, 1, 5, 5);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (6, 1, 6, 6);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (7, 1, 7, 7);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (8, 2, 8, 8);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (9, 1, 9, 9);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (10, 1, 10, 10);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (11, 2, 11, 11);
-INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID) VALUES (12, 1, 12, 12);
-
-
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (1, 1, 1, 1, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (2, 3, 1, 1, N'Uống 2 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (3, 1, 1, 1, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (2, 1, 2, 2, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (3, 2, 3, 3, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (4, 1, 4, 4, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (5, 1, 5, 5, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (6, 1, 6, 6, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (7, 1, 7, 7, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (8, 2, 8, 8, N'Uống 2 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (9, 1, 9, 9, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (10, 1, 10, 10, N'Uống 1 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (11, 2, 11, 11, N'Uống 2 viên/ngày');
+INSERT INTO DonThuoc (ThuocID, SoLuong, BienLaiID, BenhNhanID, CachDung) VALUES (12, 1, 12, 12, N'Uống 1 viên/ngày');
 
 -- Select all
 SELECT * FROM Khoa;
@@ -364,7 +363,25 @@ SELECT * FROM BienLai;
 SELECT * FROM DichVu;
 SELECT * FROM DonThuoc;
 
-
 -- Updata so luong giuong trong trong phong
 UPDATE Phong
 SET GiuongTrong = TongSoGiuong - COALESCE((SELECT COUNT(*) FROM BenhNhan WHERE PhongID = Phong.PhongID), 0);
+
+-- Updata tong tien trong bien lai
+UPDATE BienLai
+SET TongTien = (COALESCE(DichVuTien, 0) + COALESCE(DonThuocTien, 0)) * (1 - ISNULL(bh.MienGiam, 0))
+FROM BienLai
+LEFT JOIN (
+    SELECT BienLaiID, SUM(SoLan * GiaDichVu) AS DichVuTien
+    FROM DichVu
+    JOIN LoaiDichVuKham ON DichVu.LoaiDichVuID = LoaiDichVuKham.LoaiDichVuID
+    GROUP BY BienLaiID
+) AS DichVuTong ON BienLai.BienLaiID = DichVuTong.BienLaiID
+LEFT JOIN (
+    SELECT BienLaiID, SUM(SoLuong * GiaThuoc) AS DonThuocTien
+    FROM DonThuoc
+    JOIN Thuoc ON DonThuoc.ThuocID = Thuoc.ThuocID
+    GROUP BY BienLaiID
+) AS DonThuocTong ON BienLai.BienLaiID = DonThuocTong.BienLaiID
+JOIN BenhNhan bn ON BienLai.BienLaiID = bn.PhongID
+LEFT JOIN BaoHiemYTe bh ON bn.BaoHiemID = bh.BaoHiemID;
