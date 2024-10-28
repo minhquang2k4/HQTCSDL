@@ -287,28 +287,28 @@ INSERT INTO HoSoBenhAn (BenhNhanID, BacSiID, ChanDoan, NgayLap) VALUES (21, 10, 
 INSERT INTO HoSoBenhAn (BenhNhanID, BacSiID, ChanDoan, NgayLap) VALUES (22, 11, N'Chấn thương', '2023-01-22');
 
 -- Biên lai
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (1, NULL); 
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (2, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (3, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (4, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (5, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (6, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (7, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (8, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (9, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (10, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (11, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (12, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (13, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (14, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (15, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (16, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (17, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (18, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (19, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (20, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (21, NULL);
-INSERT INTO BienLai (HoSoID, TongTien) VALUES (22, NULL);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (1, 0); 
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (2, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (3, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (4, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (5, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (6, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (7, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (8, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (9, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (10, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (11, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (12, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (13, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (14, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (15, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (16, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (17, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (18, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (19, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (20, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (21, 0);
+INSERT INTO BienLai (HoSoID, TongTien) VALUES (22, 0);
 
 -- Dịch vụ
 INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES (1, 1, 1, 1);
