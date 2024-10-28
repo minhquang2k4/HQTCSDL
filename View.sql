@@ -20,4 +20,7 @@ FROM
 GO
 
 
+
+
+
 SELECT * FROM v_ThongTinBenhNhan
