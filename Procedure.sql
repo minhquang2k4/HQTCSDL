@@ -14,14 +14,14 @@ BEGIN
   -- Kiểm tra phòng còn trống không
 	IF dbo.KiemTraPhongConTrong (@PhongID) = 0
 	BEGIN
-    PRINT N'Phòng đã hết giường trống!';
+	  PRINT N'Phòng đã hết giường trống!';
     RETURN;
 	END
 
   -- Kiểm tra loại bảo hiểm y tế tồn tại không
 	IF NOT EXISTS (SELECT * FROM BaoHiemYTe WHERE BaoHiemID = @BaoHiemID) 
 	BEGIN 
-    PRINT N'Bảo hiểm không tồn tại!'; 
+	  PRINT N'Bảo hiểm không tồn tại!'; 
     RETURN; 
 	END
 
@@ -75,7 +75,7 @@ END;
 GO
 -- check
 SELECT * FROM BenhNhan
-EXECUTE sp_CapNhatBenhNhan 1, N'Nguyễn Đức Long', '2004-09-01', N'Nam', N'88 Giáp Nhị, Hà Nội', '0824919798', 2;
+EXECUTE sp_CapNhatBenhNhan 1, N'Phạm Minh Quân', '2004-09-01', N'Nam', N'88 Giáp Nhị, Hà Nội', '0824919798', 2;
 
 
 
@@ -146,8 +146,9 @@ GO
 -- check
 SELECT * FROM HoSoBenhAn
 SELECT * FROM BienLai
+SELECT * FROM BenhNhan
 
-EXECUTE sp_TaoHoSoBenhAn 1, 1, N'Đau đầu vì không có người yêu';
+EXECUTE sp_TaoHoSoBenhAn 23, 1, N'Đau đầu vì không có người yêu';
 -- ok
 
 
@@ -188,7 +189,7 @@ EXECUTE sp_ThanhToan 2
 
 -- Procedure xuất viện
 GO
-CREATE PROCEDURE sp_XuatVien
+ALTER PROCEDURE sp_XuatVien
   @BenhNhanID INT
 AS
 BEGIN
@@ -199,22 +200,37 @@ BEGIN
     RETURN;
   END
   
+  -- Kiểm tra bệnh nhân đã xuât viện hay chưa
+  IF EXISTS (SELECT 1 FROM BenhNhan WHERE BenhNhanID = @BenhNhanID AND NgayXuatVien IS NOT NULL)
+  BEGIN
+    PRINT N'Bệnh nhân đã xuất viện trước đó!';
+    RETURN;
+  END
+
+
   --goi ham ktra thanh toan
   IF dbo.CheckThanhToan(@BenhNhanID) = 0
   BEGIN
     PRINT N'Bệnh nhân chưa thanh toán!';
     RETURN;
   END
-  
+
   -- Cập nhật ngày xuất viện
   UPDATE BenhNhan
   SET NgayXuatVien = GETDATE()
   WHERE BenhNhanID = @BenhNhanID;
   PRINT N'Bệnh nhân đã xuất viện thành công!';
+
+  UPDATE Phong
+  SET GiuongTrong = GiuongTrong - 1
+  WHERE PhongID = (SELECT PhongID FROM BenhNhan WHERE BenhNhanID = @BenhNhanID)
+
 END;
 GO
 -- Check
 SELECT * FROM BenhNhan
+SELECT * FROM Phong
+EXECUTE sp_XuatVien 1
 EXECUTE sp_XuatVien 2
 
 
@@ -273,6 +289,7 @@ GO
 
 -- Check
 SELECT * FROM BenhNhan
+SELECT * FROM Phong
 EXECUTE sp_ChuyenPhong 1, 2
 -- ok
 
@@ -314,9 +331,12 @@ GO
 
 -- Check
 SELECT * FROM DichVu
-SELECT * FROM BienLai
+SELECT * FROM BienLai -- Tổng tiền tự động update
 SELECT * FROM LoaiDichVuKham
+
 EXECUTE sp_TaoDichVu 2, 1, 2 
+
+
 EXECUTE sp_TaoDichVu 16, 1, 2
 -- ok
 
@@ -361,5 +381,5 @@ END
 SELECT * FROM DonThuoc
 SELECT * FROM Thuoc
 SELECT * FROM BienLai
-EXECUTE sp_TaoDonThuoc 1, 1, 23, N'Uống 1 viên/ngày'
+EXECUTE sp_TaoDonThuoc 1, 1, 2, N'Uống 1 viên/ngày'
 -- ok

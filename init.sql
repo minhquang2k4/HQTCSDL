@@ -237,14 +237,6 @@ INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, Phon
 INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Võ Văn Út', '1968-01-18', N'Nam', N'1717 Nguyễn Văn Trỗi, TP.HCM', '0914345678', '2022-08-01', 13, 1);
 INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Lê Thị Vân', '1972-11-28', N'Nữ', N'1818 Lý Chính Thắng, TP.HCM', '0914456789', '2022-09-20', 14, 1);
 INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Lê Thị Xuân', '1972-11-28', N'Nữ', N'1818 Lý Chính Thắng, TP.HCM', '0914456789', '2022-09-20', 14, 1);
-INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Phạm Văn Duy', '1980-03-15', N'Nam', N'1919 Lê Quang Định, TP.HCM', '0914567890', '2022-10-15', 15, 2);
-INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Trần Thị Ngọc', '1993-06-19', N'Nữ', N'2020 Nguyễn Kiệm, TP.HCM', '0914678901', '2022-11-10', 16, 3);
-INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Nguyễn Văn Quý', '1977-08-09', N'Nam', N'2121 Phan Đăng Lưu, TP.HCM', '0914789012', '2022-12-01', 17, 4);
-INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Đỗ Thị Hằng', '1989-05-25', N'Nữ', N'2222 Trần Quốc Thảo, TP.HCM', '0914890123', '2023-01-20', 18, 5);
-INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Hồ Văn Thịnh', '1995-12-12', N'Nam', N'2323 Hoàng Sa, TP.HCM', '0914901234', '2023-02-05', 19, 6);
-INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Vũ Thị Yến', '1984-07-08', N'Nữ', N'2424 Nguyễn Thị Định, TP.HCM', '0914012345', '2023-03-15', 20, 1);
-INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Phạm Văn Hoàng', '1992-10-11', N'Nam', N'2525 Tôn Đức Thắng, TP.HCM', '0914123456', '2023-04-25', 21, 1);
-INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Bùi Thị Lan', '1987-03-18', N'Nữ', N'2626 Điện Biên Phủ, TP.HCM', '0914234567', '2023-05-05', 22, 2);
 
 -- Bác sĩ
 INSERT INTO BacSi (HoTen, SDT, Email, KhoaID) VALUES (N'Trần Văn Nam', '0912345679', 'nam@gmail.com', 1);
