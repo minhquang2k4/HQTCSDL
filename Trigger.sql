@@ -1,66 +1,6 @@
 USE QUANLYBENHNHAN
 
-
--- Function
--- hàm kiểm tra phòng còn trống khong
 GO
-CREATE FUNCTION dbo.KiemTraPhongConTrong (@PhongID INT)
-RETURNS BIT
-AS
-BEGIN
-  DECLARE @result BIT;
-  if (SELECT GiuongTrong FROM Phong WHERE PhongID = @PhongID) > 0
-    SET @result = 1;
-  ELSE
-    SET @result = 0;
-  RETURN @result;
-END
-GO
-
--- check
-SELECT dbo.KiemTraPhongConTrong(2) AS KiemTraPhongConTrong
--- ok
-
--- Kiểm tra bệnh nhân đã thanh toán chưa
-GO
-CREATE FUNCTION dbo.CheckThanhToan (@BenhNhanID INT)
-RETURNS BIT
-AS
-BEGIN
-  DECLARE @result BIT;
-  SELECT TOP 1 @result = ThanhToan
-  FROM BienLai
-  WHERE HoSoID IN (SELECT HoSoID FROM HoSoBenhAn WHERE BenhNhanID = @BenhNhanID)
-  ORDER BY BienLaiID DESC;
-  
-  RETURN ISNULL(@result, 0);
-END
-GO
-
--- Check
-SELECT dbo.CheckThanhToan(1) as Trang_thai_thanh_toan
--- ok
-
--- Tính tuổi của bệnh nhân
-GO
-CREATE FUNCTION dbo.TinhTuoi (@BenhNhanID INT)
-RETURNS INT
-AS
-BEGIN
-  DECLARE @Tuoi INT;
-  SET @Tuoi = DATEDIFF(YEAR, (SELECT NgaySinh FROM BenhNhan WHERE BenhNhanID = @BenhNhanID), GETDATE());
-  RETURN @Tuoi;
-END
-GO
-
--- Check
-SELECT dbo.TinhTuoi(2) AS Tuoi
--- ok
-
--- Trigger
--- Tự động cập nhật số lượng giường khi có bệnh nhân nhập viện
-GO
-
 CREATE TRIGGER trg_UpdateSoLuongGiuongTrong ON BenhNhan AFTER INSERT
 AS
 BEGIN
@@ -74,6 +14,11 @@ GO
 SELECT * FROM Phong
 INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID) VALUES (N'Lê Hải Lâm', '2004-09-01', N'Nam', N'88 Giáp Nhị, Hà Nội', '0912567890', '2021-02-15', 1, 1);
 -- ok
+
+
+
+
+
 
 
 -- Tự động cập nhật tổng tiền trong biên lai khi có dịch vụ hoặc đơn thuốc được tạo mới
@@ -102,8 +47,14 @@ INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES
 (1, 1, 1, 1),
 (2, 2, 1, 1);
 -- ok
-GO
 
+
+
+
+
+
+-- trigger tự động cập nhật tạo đơn thuốc 
+GO
 CREATE TRIGGER trg_UpdateTongTienBienLai_AfterInsertDonThuoc ON DonThuoc AFTER INSERT
 AS
 BEGIN
@@ -119,5 +70,4 @@ BEGIN
     )
   WHERE BienLai.BienLaiID IN (SELECT DISTINCT BienLaiID FROM inserted);
 END
-
 GO
