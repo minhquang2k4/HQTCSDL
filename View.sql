@@ -24,3 +24,45 @@ GO
 
 
 SELECT * FROM v_ThongTinBenhNhan
+
+
+
+GO
+CREATE VIEW v_ThongKeSoLuongXuatVienTheoThang AS
+SELECT 
+  YEAR(NgayXuatVien) AS Nam,
+  MONTH(NgayXuatVien) AS Thang,
+  COUNT(*) AS SoLuongXuatVien
+FROM 
+    BenhNhan
+WHERE 
+  NgayXuatVien IS NOT NULL -- Chỉ lấy những bệnh nhân đã xuất viện
+GROUP BY 
+  YEAR(NgayXuatVien),
+  MONTH(NgayXuatVien);
+GO
+
+SELECT * FROM v_ThongKeSoLuongXuatVienTheoThang
+
+
+
+
+GO
+CREATE VIEW v_ThongKeSoLuongNhapVienTheoThang AS
+SELECT 
+  YEAR(NgayNhapVien) AS Nam,
+  MONTH(NgayNhapVien) AS Thang,
+  COUNT(*) AS SoLuongNhapVien
+FROM 
+  BenhNhan
+WHERE 
+  NgayNhapVien IS NOT NULL -- Chỉ lấy những bệnh nhân đã nhập viện
+GROUP BY 
+  YEAR(NgayNhapVien),
+  MONTH(NgayNhapVien);
+GO
+
+
+
+SELECT * FROM v_ThongKeSoLuongNhapVienTheoThang
+

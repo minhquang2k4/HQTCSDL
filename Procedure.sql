@@ -280,7 +280,7 @@ BEGIN
   
   -- Tăng số lượng giường trống của phòng cũ
   UPDATE Phong
-  SET GiuongTrong = GiuongTrong + 1
+  SET GiuongTrong = GiuongTrong + 1 
   WHERE PhongID = @PhongCuID;
   -- Giảm số lượng giường trống của phòng mới 
   UPDATE Phong

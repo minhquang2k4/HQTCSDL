@@ -65,7 +65,7 @@ BEGIN
       FROM inserted i
       LEFT JOIN Thuoc dt ON i.ThuocID = dt.ThuocID
       LEFT JOIN BenhNhan bn ON i.BenhNhanID = bn.BenhNhanID
-      LEFT JOIN BaoHiemYTe bh ON bn.BaoHiemID = bh.BaoHiemID
+      LEFT JOIN BaoHiemYTe bh ON bn.BaoHiemID = bh.BaoHiemID 
       WHERE i.BienLaiID = BienLai.BienLaiID
     )
   WHERE BienLai.BienLaiID IN (SELECT DISTINCT BienLaiID FROM inserted);

@@ -7,7 +7,7 @@ RETURNS BIT
 AS
 BEGIN
   DECLARE @result BIT;
-  if (SELECT GiuongTrong FROM Phong WHERE PhongID = @PhongID) > 0
+  if (SELECT GiuongTrong FROM Phong WHERE PhongID = @PhongID) > 0 
     SET @result = 1;
   ELSE
     SET @result = 0;

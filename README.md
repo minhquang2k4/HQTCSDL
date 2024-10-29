@@ -1,6 +1,6 @@
 # HQTCSDL
 
-# Khởi tạo:
+# Khởi tạo: 
 
 * Clone dự án: git clone https://github.com/minhquang2k4/HQTCSDL.git
 * Chạy file init (chỉ cần 1 lần)
