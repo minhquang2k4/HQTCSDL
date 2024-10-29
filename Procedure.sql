@@ -1,6 +1,7 @@
 USE QUANLYBENHNHAN
 
 GO
+-- thủ tục nhập viện cho bệnh nhân
 CREATE PROCEDURE sp_ThemBenhNhan
   @HoTen NVARCHAR(100),
   @NgaySinh DATE,
@@ -222,7 +223,7 @@ BEGIN
   PRINT N'Bệnh nhân đã xuất viện thành công!';
 
   UPDATE Phong
-  SET GiuongTrong = GiuongTrong - 1
+  SET GiuongTrong = GiuongTrong + 1
   WHERE PhongID = (SELECT PhongID FROM BenhNhan WHERE BenhNhanID = @BenhNhanID)
 
 END;
@@ -240,7 +241,7 @@ EXECUTE sp_XuatVien 2
 
 -- Procedure chuyển phòng
 GO
-CREATE PROCEDURE sp_ChuyenPhong
+ALTER PROCEDURE sp_ChuyenPhong
   @BenhNhanID INT,
   @PhongMoiID INT
 AS
@@ -263,6 +264,12 @@ BEGIN
   BEGIN
     PRINT N'Bệnh nhân đã xuất viện!';
     RETURN;
+  END
+
+  IF @PhongCuID = @PhongMoiID
+  BEGIN
+	PRINT N'ID Phòng Trùng Nhau';
+	RETURN;
   END
 
   IF dbo.KiemTraPhongConTrong(@PhongMoiID) = 0
@@ -291,6 +298,9 @@ GO
 -- Check
 SELECT * FROM BenhNhan
 SELECT * FROM Phong
+
+EXECUTE sp_ChuyenPhong 1, 1 -- Phòng trùng nhau
+
 EXECUTE sp_ChuyenPhong 1, 2
 -- ok
 
