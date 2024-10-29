@@ -53,7 +53,7 @@ INSERT INTO DichVu (LoaiDichVuID, SoLan, BienLaiID, BenhNhanID) VALUES
 
 
 
--- trigger tự động cập nhật tạo đơn thuốc 
+-- trigger tự động cập nhật khi tạo đơn thuốc 
 GO
 CREATE TRIGGER trg_UpdateTongTienBienLai_AfterInsertDonThuoc ON DonThuoc AFTER INSERT
 AS
@@ -61,9 +61,9 @@ BEGIN
   UPDATE BienLai 
   SET TongTien = COALESCE(TongTien, 0) + 
     (
-      SELECT SUM(i.SoLuong * dt.GiaDonThuoc * (1 - ISNULL(bh.MienGiam, 0)))
+      SELECT SUM(i.SoLuong * dt.GiaThuoc * (1 - ISNULL(bh.MienGiam, 0)))
       FROM inserted i
-      LEFT JOIN DonThuoc dt ON i.DonThuocID = dt.DonThuocID
+      LEFT JOIN Thuoc dt ON i.ThuocID = dt.ThuocID
       LEFT JOIN BenhNhan bn ON i.BenhNhanID = bn.BenhNhanID
       LEFT JOIN BaoHiemYTe bh ON bn.BaoHiemID = bh.BaoHiemID
       WHERE i.BienLaiID = BienLai.BienLaiID

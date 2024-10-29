@@ -10,19 +10,19 @@ CREATE PROCEDURE sp_ThemBenhNhan
   @PhongID INT,
   @BaoHiemID INT
 AS
-BEGIN       
+BEGIN
   -- Kiểm tra phòng còn trống không
 	IF dbo.KiemTraPhongConTrong (@PhongID) = 0
 	BEGIN
 	  PRINT N'Phòng đã hết giường trống!';
-    RETURN;
+	  RETURN;
 	END
 
   -- Kiểm tra loại bảo hiểm y tế tồn tại không
 	IF NOT EXISTS (SELECT * FROM BaoHiemYTe WHERE BaoHiemID = @BaoHiemID) 
 	BEGIN 
-	  PRINT N'Bảo hiểm không tồn tại!'; 
-    RETURN; 
+	  PRINT N'Loại bảo hiểm không tồn tại!'; 
+	  RETURN; 
 	END
 
 	INSERT INTO BenhNhan (HoTen, NgaySinh, GioiTinh, DiaChi, SDT, NgayNhapVien, PhongID, BaoHiemID)
@@ -59,7 +59,7 @@ BEGIN
   END
   IF NOT EXISTS (SELECT * FROM BaoHiemYTe WHERE BaoHiemID = @BaoHiemID) 
   BEGIN 
-    PRINT N'Bảo hiểm không tồn tại!'; 
+    PRINT N'Loại bảo hiểm không tồn tại!'; 
     RETURN; 
   END
 
@@ -189,7 +189,7 @@ EXECUTE sp_ThanhToan 2
 
 -- Procedure xuất viện
 GO
-ALTER PROCEDURE sp_XuatVien
+CREATE PROCEDURE sp_XuatVien
   @BenhNhanID INT
 AS
 BEGIN
@@ -230,6 +230,7 @@ GO
 -- Check
 SELECT * FROM BenhNhan
 SELECT * FROM Phong
+SELECT * FROM BienLai
 EXECUTE sp_XuatVien 1
 EXECUTE sp_XuatVien 2
 
